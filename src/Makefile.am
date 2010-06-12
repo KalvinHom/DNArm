@@ -24,6 +24,13 @@ genome_index_LADD = $(GENOME_INDEX_LADD)
 genome_index_CFLAGS = $(GENOME_INDEX_CFLAGS)
 endif
 
+if BUILD_GENOME_INDEX
+bin_PROGRAMS += parallel-db
+parallel_db_SOURCES = db_test.c cldb.c cvdb.c
+parallel_db_LADD = $(PARALLEL_DB_LADD)
+parallel_db_CFLAGS = $(PARALLEL_DB_CFLAGS)
+endif
+
 if BUILD_INDEX
 bin_PROGRAMS += index
 index_SOURCES = index.c tchdb.c
@@ -68,3 +75,5 @@ tchdb_test_SOURCES = db-test.c tchdb.c
 tchdb_test_LDADD = $(TCHDB_TEST_LDADD)
 tchdb_test_CFLAGS = $(TCHDB_TEST_CFLAGS)
 endif
+
+

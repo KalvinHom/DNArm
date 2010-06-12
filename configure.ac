@@ -1,4 +1,3 @@
-#                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.0])
@@ -81,6 +80,18 @@ AC_SUBST([BUILD_GENOME_INDEX], [${BUILD_GENOME_INDEX}])
 AC_SUBST([GENOME_INDEX_LDADD], ["${PTHREAD_LIBS}"])
 AC_SUBST([GENOME_INDEX_CFLAGS], ["${PTHREAD_CFLAGS}"])
 AM_CONDITIONAL([BUILD_GENOME_INDEX], [test x$BUILD_GENOME_INDEX = xyes])
+
+# parallel_db
+BUILD_PARALLEL_DB=no
+AS_IF([test x$HAVE_PTHREADS = xyes ],
+  [BUILD_PARALLEL_DB=yes])
+AC_ARG_WITH([parallel-db],
+  AC_HELP_STRING([--without-parallel-db], [Do not build parallel-db.]),
+  [BUILD_PARALLEL_DB=no])
+AC_SUBST([BUILD_PARALLEL_DB], [${BUILD_PARALLEL_DB}])
+AC_SUBST([PARALLEL_DB_LDADD], ["${PTHREAD_LIBS}"])
+AC_SUBST([PARALLEL_DB_CFLAGS], ["${PTHREAD_CFLAGS}"])
+AM_CONDITIONAL([BUILD_PARALLEL_DB], [test x$BUILD_PARALLEL_DB = xyes])
 
 # index
 #
@@ -178,15 +189,17 @@ AC_OUTPUT
 echo
 echo " DNArm build summary "
 echo "====================="
-echo "cgm             : $BUILD_CGM"
-echo "ctb             : $BUILD_CTB"
+echo "cgm : $BUILD_CGM"
+echo "ctb : $BUILD_CTB"
 echo "genome-geometry : $BUILD_GENOME_GEOMETRY"
-echo "genome-index    : $BUILD_GENOME_INDEX"
-echo "index           : $BUILD_INDEX"
-echo "memdb-test      : $BUILD_MEMDB_TEST"
-echo "pindex          : $BUILD_PINDEX"
-echo "readgen         : $BUILD_READGEN"
-echo "samplecl        : $BUILD_SAMPLECL"
-echo "tcadb-test      : $BUILD_TCADB_TEST"
-echo "tchdb-test      : $BUILD_TCHDB_TEST"
+echo "genome-index : $BUILD_GENOME_INDEX"
+echo "index : $BUILD_INDEX"
+echo "memdb-test : $BUILD_MEMDB_TEST"
+echo "pindex : $BUILD_PINDEX"
+echo "readgen : $BUILD_READGEN"
+echo "samplecl : $BUILD_SAMPLECL"
+echo "tcadb-test : $BUILD_TCADB_TEST"
+echo "tchdb-test : $BUILD_TCHDB_TEST"
 echo
+
+
